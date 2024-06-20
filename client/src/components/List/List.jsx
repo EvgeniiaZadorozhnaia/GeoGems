@@ -1,66 +1,72 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosInstance from "../../axiosInstance";
-const { VITE_API } = import.meta.env;
-import OneCardForAdmin from "../OneCard/OneCardForAdmin";
 import AdminForm from "../AdminForm/AdminForm";
+import OneCardForAdmin from "../OneCard/OneCardForAdmin";
 
-function List({ entries, setEntries, inputs, setInputs }) {
+const { VITE_API } = import.meta.env;
+
+function List() {
+  const [entries, setEntries] = useState([]);
   const [editCard, setEditCard] = useState(null);
-
+  const [inputs, setInputs] = useState({
+    title: "",
+    price: "",
+    description: "",
+    url: "",
+  });
 
   useEffect(() => {
-    (async function () {
+    async function fetchData() {
       try {
         const { data } = await axiosInstance.get(`${VITE_API}/stones`);
-        setEntries(() => data);
+        setEntries(data);
       } catch (error) {
-        console.log(error);
+        console.error("Error:", error);
       }
-    })();
+    }
+    fetchData();
   }, []);
 
-
-  function editCardHandler(card) {
+  const editCardHandler = (card) => {
     setEditCard(card);
-  }
+    setInputs({
+      title: "",
+      price: "",
+      description: "",
+      url: "",
+    });
+  };
 
-  function closeEditForm() {
+  const closeEditForm = () => {
     setEditCard(null);
-  }
+    setInputs({ title: "", price: "", description: "", url: "" });
+  };
 
   return (
-    <div style={{
-      marginTop: "80px",
-      flexWrap: "wrap",
-      justifyContent: "center",
-      alignItems: "center",
-      marginBottom: "80px",
-    }}>
-      <div
-      >
+    <div style={{ marginTop: "80px", marginBottom: "80px", textAlign: "center" }}>
+      <h1 style={{color:'white'}}>Привет, админ, что на сегодня?</h1>
+      <AdminForm
+        card={editCard || {}}
+        onClose={closeEditForm}
+        entries={entries}
+        setEntries={setEntries}
+        inputs={inputs}
+        setInputs={setInputs}
+      />
+      <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
         {entries.length ? (
           entries.map((el) => (
             <OneCardForAdmin
-              card={el}
               key={el.id}
+              card={el}
               setEntries={setEntries}
               onEdit={editCardHandler}
             />
           ))
         ) : (
-          <h3 style={{ fontSize: "40px" }}>Записей нет</h3>
+          <h3>Записей нет</h3>
         )}
       </div>
-      {editCard && (
-        <AdminForm
-          card={editCard}
-          onClose={closeEditForm}
-          entries={entries}
-          setEntries={setEntries}
-          inputs={inputs}
-          setInputs={setInputs}
-        />
-      )}
     </div>
   );
 }

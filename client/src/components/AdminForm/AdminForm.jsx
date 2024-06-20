@@ -7,85 +7,99 @@ function AdminForm({ card, onClose, entries, setEntries, inputs, setInputs }) {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  async function redactHandler(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    const updatedFields = {};
-    if (inputs.title) updatedFields.title = inputs.title;
-    if (inputs.price) updatedFields.price = inputs.price;
-    if (inputs.description) updatedFields.description = inputs.description;
-    if (inputs.url) updatedFields.url = inputs.url;
+
     try {
-      const { data } = await axiosInstance.put(
-        `${VITE_API}/stones/${card.id}`,
-        updatedFields
-      );
-      setEntries((prev) => prev.map((el) => (el.id === data.id ? data : el)));
-      setInputs(() => ({ title:"", price: "", description: "", url: "" }));
+      let response;
+
+      if (card.id) {
+        const updatedFields = {
+          title: inputs.title || card.title,
+          price: inputs.price || card.price,
+          description: inputs.description || card.description,
+          url: inputs.url || card.url,
+        };
+        response = await axiosInstance.put(
+          `${VITE_API}/stones/${card.id}`,
+          updatedFields
+        );
+        setEntries((prev) =>
+          prev.map((el) => (el.id === response.data.id ? response.data : el))
+        );
+      } else {
+        response = await axiosInstance.post(`${VITE_API}/stones`, inputs);
+        setEntries((prev) => [...prev, response.data]);
+      }
+
+      setInputs({ title: "", price: "", description: "", url: "" });
       onClose();
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
     }
   }
+
   return (
-    <>
-      {card.title ? <div style={{ color: "white" }}>{card.title}</div> : <></>}
-      <form style={{ color: "white" }} onSubmit={redactHandler}>
+    <div>
+      {card.id ? card.title : "Создание новой карточки"}
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="htmlForm-label">
+          <label htmlFor="title" className="form-label">
             Название
           </label>
           <input
+            type="text"
+            className="form-control"
+            id="title"
+            name="title"
             value={inputs.title}
             onChange={inputsHandler}
-            type="text"
-            className="htmlForm-control"
-            aria-describedby="emailHelp"
-            name="title"
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="htmlForm-label">
+          <label htmlFor="price" className="form-label">
             Цена
           </label>
           <input
+            type="text"
+            className="form-control"
+            id="price"
+            name="price"
             value={inputs.price}
             onChange={inputsHandler}
-            type="text"
-            className="htmlForm-control"
-            aria-describedby="emailHelp"
-            name="price"
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="htmlForm-label">
+          <label htmlFor="description" className="form-label">
             Описание
           </label>
           <input
+            type="text"
+            className="form-control"
+            id="description"
+            name="description"
             value={inputs.description}
             onChange={inputsHandler}
-            type="text"
-            className="htmlForm-control"
-            name="description"
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="htmlForm-label">
+          <label htmlFor="url" className="form-label">
             Картинка
           </label>
           <input
+            type="text"
+            className="form-control"
+            id="url"
+            name="url"
             value={inputs.url}
             onChange={inputsHandler}
-            type="text"
-            className="htmlForm-control"
-            aria-describedby="emailHelp"
-            name="url"
           />
         </div>
         <button type="submit" className="btn btn-primary">
-          Отправить изменения
+          {card.id ? "Сохранить изменения" : "Создать"}
         </button>
       </form>
-    </>
+    </div>
   );
 }
 

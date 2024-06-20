@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import axiosInstance from "../../axiosInstance";
 import styles from "./OneCard.module.css";
 const { VITE_API } = import.meta.env;
+import { useNavigate } from "react-router-dom";
 
 function OneCardForAdmin({ card, setEntries, onEdit }) {
   async function deleteHandler() {
@@ -17,10 +18,11 @@ function OneCardForAdmin({ card, setEntries, onEdit }) {
   function editHandler() {
     onEdit(card); // Вызываем функцию onEdit для открытия формы редактирования с данными карточки
   }
-
+  const navigate = useNavigate();
   return (
     <Card style={{ padding: "15px" }} className={styles.card}>
       <Card.Img
+        onClick={() => navigate(`/catalog/${card.id}`)}
         style={{ cursor: "pointer" }}
         className={styles.img}
         src={card.url}

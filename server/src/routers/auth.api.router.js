@@ -33,29 +33,34 @@ router
   })
   .post("/signin", async (req, res) => {
     const { email, password } = req.body;
-
+  
     if (!(email && password)) {
       return res.status(400).json({ message: "All fields are required" });
     }
-
-    const user = await User.findOne({ where: { email } });
-
-    if (!user) {
-      res.status(401).json({ message: "Incorrect user or password" });
-    }
-
-    const correctPass = await bcrypt.compare(password, user.password);
-    if (!correctPass) {
-      res.status(401).json({ message: "Incorrect user or password" });
-    } else {
+  
+    try {
+      const user = await User.findOne({ where: { email } });
+  
+      if (!user) {
+        return res.status(401).json({ message: "Incorrect user or password" });
+      }
+  
+      const correctPass = await bcrypt.compare(password, user.password);
+      if (!correctPass) {
+        return res.status(401).json({ message: "Incorrect user or password" });
+      }
+  
       const plainUser = user.get();
       delete plainUser.password;
-
+  
       const { accessToken, refreshToken } = generateToken({ user: plainUser });
-
+  
       res
         .cookie("refreshToken", refreshToken, cookiesConfig.refresh)
         .json({ user: plainUser, accessToken });
+    } catch (error) {
+      console.error("Error in signin:", error);
+      res.status(500).json({ message: "Internal Server Error" });
     }
   })
   .get("/logout", (req, res) => {
