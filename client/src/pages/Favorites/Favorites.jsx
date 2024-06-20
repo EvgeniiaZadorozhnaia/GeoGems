@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import OneCardForFavorite from "../../components/OneCard/OneCardForFavorite";
 import axiosInstance from "../../axiosInstance";
-// import styles from './Catalog.module.css';
 
 const { VITE_API } = import.meta.env;
 

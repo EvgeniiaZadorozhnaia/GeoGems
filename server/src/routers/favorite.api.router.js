@@ -18,8 +18,8 @@ router
   .delete("/", verifyAccessToken, async (req, res) => {
     const { userId, stoneId } = req.body;
     try {
-      const entry = await UsersStone.destroy({ where: { userId, stoneId } });
-      res.json(entry);
+      await UsersStone.destroy({ where: { userId, stoneId } });
+      res.sendStatus(200);
     } catch (error) {
       console.error(error);
       res.sendStatus(400);

@@ -15,6 +15,7 @@ export default function Navbar({ user, setUser }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
+        {user?.isAdmin ? <Link to="/adminPage">Кабинет админа</Link> : <></>}
         <Link to="/">Главная</Link>
         <Link to="/catalog">Каталог</Link>
         {user ? <Link to="/favorites">Избранное</Link> : <></>}
