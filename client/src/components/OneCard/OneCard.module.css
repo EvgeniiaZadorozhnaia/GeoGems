@@ -1,0 +1,33 @@
+.card {
+    background-image: url('pictures/black-patterned-texture-431613736816.jpg');
+    padding: 10px;
+    border: 2px solid white;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.img {
+    height: 200px;
+    width: 200px;
+    border: 1px solid white;
+}
+
+.title, .price {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+
+button {
+    background-color: white;
+    border: 2px solid white;
+    font-weight: 800;
+    margin: 5px;
+}
+
+button:hover {
+    transform: scale(1.05);
+}

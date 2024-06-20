@@ -1,0 +1,15 @@
+.contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid white;
+    padding: 20px;
+    width: 800px;
+    justify-content: center;
+    height: 500px;
+    background-image: url('pictures/black-patterned-texture-431613736816.jpg');
+    color: white;
+    border-radius: 15px;
+    font-size: 20px;
+    text-decoration: underline;
+}
