@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import axiosInstance, { setAccessToken } from "./axiosInstance";
 import Favorites from "./pages/Favorites/Favorites";
 import About from "./pages/About_us/About";
+const { VITE_API } = import.meta.env;
 
 function App() {
   const [user, setUser] = useState();
@@ -25,7 +26,7 @@ function App() {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    axiosInstance(`${import.meta.env.VITE_API}/tokens/refresh`).then((res) => {
+    axiosInstance(`${VITE_API}/tokens/refresh`).then((res) => {
       setUser(res.data.user);
       setAccessToken(res.data.accessToken);
     });

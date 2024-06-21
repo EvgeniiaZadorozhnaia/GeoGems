@@ -32,6 +32,7 @@ router
       .json({ user: plainUser, accessToken });
   })
   .post("/signin", async (req, res) => {
+    console.log('dklgkfjgjkfhjgfkghjl');
     const { email, password } = req.body;
   
     if (!(email && password)) {

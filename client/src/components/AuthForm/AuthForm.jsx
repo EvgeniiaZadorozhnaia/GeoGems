@@ -34,7 +34,8 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
               type='email'
               name='email'
               value={inputs?.email}
-              placeholder='eu.skorobogatowa@yandex.ru'
+              placeholder='Ваш e-mail'
+              required
             />
             <Input
               onChange={changeHandler}
@@ -43,6 +44,7 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
               name='password'
               value={inputs?.password}
               placeholder='Пароль'
+              required
             />
           </>
         )}
@@ -53,7 +55,8 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
               borderColor='#3f3e3e'
               name='username'
               value={inputs?.name}
-              placeholder='Евгения'
+              placeholder='Имя'
+              required
             />
             <Input
               onChange={changeHandler}
@@ -61,7 +64,8 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
               type='email'
               name='email'
               value={inputs?.description}
-              placeholder='eu.skorobogatowa@yandex.ru'
+              placeholder='e-mail'
+              required
             />
             <Input
               onChange={changeHandler}
@@ -70,18 +74,19 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
               name='password'
               value={inputs?.password}
               placeholder='Пароль'
+              required
             />
           </>
         )}
       </div>
       <div className={styles.btns}>
         {type === 'signin' && (
-          <Button style={{width:'100px'}} type='submit' colorScheme='blue'>
+          <Button type='submit' className={styles.btnprimary}>
             Вход
           </Button>
         )}
         {type === 'signup' && (
-          <Button style={{width:'150px'}} type='submit' colorScheme='blue'>
+          <Button type='submit' className={styles.btnprimary}>
             Регистрация
           </Button >
         )}

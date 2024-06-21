@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axiosInstance";
 const { VITE_API } = import.meta.env;
+import styles from "./More.module.css";
 
 function More() {
   const [card, setCard] = useState([]);
@@ -21,54 +22,19 @@ function More() {
 
   return (
     <>
-      <div
-        style={{ display: "flex", alignItems: "center", marginTop: "-50px" }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "15px",
-          }}
-        >
+      <div className={styles.container}>
+        <div className={styles.picture}>
           <h1 style={{ color: "white" }}>{card.title}</h1>
-          <img style={{ height: "650px" }} src={card.url}></img>
+          <img className={styles.img} src={card.url}></img>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            height: "650px",
-            marginTop: '35px'
-          }}
-        >
-          <h1 style={{ color: "white" }}>Описание</h1>
-          <p
-            style={{
-              width: "800px",
-              color: "white",
-              textAlign: "justify",
-              paddingLeft: "50px",
-              fontSize: "25px",
-            }}
-          >
-            {card.description}
-          </p>
-          <p
-            style={{
-              color: "white",
-              fontSize: "25px",
-              backgroundColor: "grey",
-              padding: "10px",
-            }}
+        <div className={styles.description}>
+          <h1>Описание</h1>
+          <p style={{fontSize: '25px'}}>{card.description}</p>
+          <p className={styles.price}
           >
             Цена: {card.price} рублей
           </p>
-          <button
-            style={{ width: "100px", height: "35px", fontSize: "20px" }}
+          <button className={styles.button}
             onClick={() => back(-1)}
           >
             Назад

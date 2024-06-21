@@ -1,12 +1,15 @@
 import styles from "./HomePage.module.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
     <>
       <div className={styles.container}>
         <div className={styles.info}>
-          <h3 style={{fontSize:'25px', width:'800px'}} className={styles.hello}>
+          <h3
+            style={{ fontSize: "25px", width: "800px" }}
+            className={styles.hello}
+          >
             Добро пожаловать в Мир коллекционных горных пород!<br></br>
             Откройте тайны Земли вместе с нами
           </h3>
@@ -24,15 +27,20 @@ export default function HomePage() {
             только начинаете свое путешествие в мир минералов, наш магазин
             предложит вам нечто особенное. Мы предлагаем как доступные образцы
             для начинающих коллекционеров, так и редкие экземпляры для опытных.
-            <br/>
-            <br/>
+            <br />
+            <br />
             <hr />
           </p>
-          <Link style={{fontSize:'25px'}} to='/catalog'>Коллекция</Link>
+          <Link style={{ fontSize: "25px" }} to="/catalog">
+            Коллекция
+          </Link>
         </div>
         <div className={styles.logo}>
           <h1 className={styles.Geo}>GeoGems</h1>
-          <img className={styles.diamond} src="/pictures/32882dbcd4424eb8e814ce8e62e68361.gif"></img>
+          <img
+            className={styles.diamond}
+            src="/pictures/32882dbcd4424eb8e814ce8e62e68361.gif"
+          ></img>
         </div>
       </div>
     </>

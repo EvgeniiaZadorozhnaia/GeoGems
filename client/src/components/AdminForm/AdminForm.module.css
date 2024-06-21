@@ -1,0 +1,58 @@
+.container {
+    background-image: url('pictures/black-patterned-texture-431613736816.jpg');
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #ccc;
+    color: white;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 4px;
+  }
+  
+  .btnprimary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .btnprimary:hover {
+    background-color: #0056b3;
+  }
+  
+  .mb3 {
+    margin-bottom: 15px;
+  }
+  
+  .label {
+    font-size: 20px;
+    font-weight: bold;
+    
+  }
+  
+  .label,
+  .label + .input {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .h3 {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
