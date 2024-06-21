@@ -8,6 +8,7 @@ const { VITE_API } = import.meta.env;
 
 export default function AuthForm({ title, type = 'signin', setUser }) {
   const [inputs, setInputs] = useState({});
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const changeHandler = (e) => {
@@ -16,10 +17,15 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const res = await axiosInstance.post(`${VITE_API}/auth/${type}`, inputs);
-    setUser(res.data.user);
-    setAccessToken(res.data.accessToken);
-    navigate('/')
+    try {
+      const res = await axiosInstance.post(`${VITE_API}/auth/${type}`, inputs);
+      setUser(res.data.user);
+      setAccessToken(res.data.accessToken);
+      navigate('/')
+    } catch (err) {
+      setError('Неправильный логин или пароль');
+    }
+   
   };
 
   return (
@@ -79,6 +85,7 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
           </>
         )}
       </div>
+      {error && <p className={styles.error}>{error}</p>}
       <div className={styles.btns}>
         {type === 'signin' && (
           <Button type='submit' className={styles.btnprimary}>

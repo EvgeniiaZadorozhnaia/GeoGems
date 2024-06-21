@@ -7,8 +7,8 @@ export default function Root({ user, setUser }) {
   return (
     <>
       <Navbar user={user} setUser={setUser} />
-      <Outlet/>
-      <Footer />
+      <Outlet />
+      <Footer user={user} />
     </>
   );
 }
