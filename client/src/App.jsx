@@ -24,6 +24,7 @@ function App() {
     url: "",
   });
   const [entries, setEntries] = useState([]);
+  const [cost, setCost] = useState(0);
 
   useEffect(() => {
     axiosInstance(`${VITE_API}/tokens/refresh`).then((res) => {
@@ -37,7 +38,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Root user={user} setUser={setUser} />,
+      element: <Root user={user} setUser={setUser} cost={cost} />,
       children: [
         {
           path: "/",
@@ -77,7 +78,7 @@ function App() {
         },
         {
           path: "/catalog/:id",
-          element: <More />,
+          element: <More user={user} setCost={setCost}/>,
         },
         {
           path: "/about",

@@ -37,10 +37,11 @@
 }
 
 .button {
-  width: 100px;
+  width: 150px;
   font-size: 20px;
   padding: 5px;
   border: none;
+  margin: 15px;
 }
 
 .button:hover {
@@ -48,6 +49,5 @@
   background-color: rgb(90, 95, 100);
   border: none;
   color: white;
+  cursor: pointer;
 }
-
-/* style={{ width: "100px", height: "35px", fontSize: "20px" }} */

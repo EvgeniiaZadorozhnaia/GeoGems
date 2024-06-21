@@ -3,8 +3,7 @@ import styles from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-export default function Navbar({ user, setUser }) {
-  const [cost, setCost] = useState(0);
+export default function Navbar({ user, setUser, cost }) {
   const logoutHandler = async () => {
     const res = await axiosInstance(`${import.meta.env.VITE_API}/auth/logout`);
 
