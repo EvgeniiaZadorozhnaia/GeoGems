@@ -3,7 +3,6 @@ require('dotenv').config();
 
 const verifyRefreshToken = (req, res, next) => {
   try {
-    console.log('dfdfdf');
     const { refreshToken } = req.cookies;
     const { user } = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
     res.locals.user = user;
